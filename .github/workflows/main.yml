@@ -1,8 +1,9 @@
-name: linting, testing, building
+name: linting
 on:
     push:
         branches: [master]
-    pull_request: [master]
+    pull_request:
+        branches: [master]
 jobs:
     pipeline:
         runs-on: ubuntu-latest
@@ -12,10 +13,10 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-            - name: Starting Node.js ${{matrix.node-version}}
+            - name: Staring Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v1
               with:
-                  node-version: ${{matrix.node-version}}
+                  node-version: ${{ matrix.node-version }}
             - name: install modules
               run: npm install
             - name: build production project
@@ -23,6 +24,6 @@ jobs:
             - name: linting typescript
               run: npm run lint:ts
             - name: linting css
-              run: npm run lint:css
+              run: npm run lint:scss
             - name: unit testing
               run: npm run test:unit
